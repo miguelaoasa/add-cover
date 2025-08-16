@@ -8,11 +8,6 @@ import os
 import sys
 
 def add_cover(cover, file):
-    mime = guess_type(cover)[0]
-    if mime not in ["image/jpeg", "image/png"]:
-        print(f"[!!] Invalid cover MIME type.")
-        sys.exit(1)
-
     audio = ID3(file)
 
     audio.add(
@@ -42,6 +37,11 @@ def main():
 
     cover = args.cover
     check_file(cover)
+
+    mime = guess_type(cover)[0]
+    if mime not in ["image/jpeg", "image/png"]:
+        print(f"[!!] Invalid cover MIME type.")
+        sys.exit(1)
 
     for file in args.files:
         check_file(file)
